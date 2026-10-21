@@ -1028,6 +1028,7 @@
           padding: 60px 20px;
           background-color: #fafafa;
           text-align: center;
+          scroll-margin-top: 88px;
         }
         .template4-address-container {
           max-width: 980px;
@@ -4628,6 +4629,29 @@
         </div>
       </div>
     </div>
+
+    <script>
+      // All order links outside the location picker lead shoppers here first.
+      // The two "Order Now" links inside #contact remain direct shop links.
+      document.addEventListener(
+        "click",
+        function (event) {
+          const orderLink = event.target.closest(
+            'a[href*="skiplinow.com/shop/"]'
+          );
+          if (!orderLink || orderLink.closest("#contact .template4-location-card")) {
+            return;
+          }
+
+          event.preventDefault();
+          event.stopImmediatePropagation();
+          document
+            .getElementById("contact")
+            .scrollIntoView({ behavior: "smooth", block: "start" });
+        },
+        true
+      );
+    </script>
 
     <script>
       // Smooth scrolling for anchor links
